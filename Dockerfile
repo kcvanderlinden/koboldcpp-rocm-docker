@@ -29,5 +29,5 @@ FROM stage3 as stage4
 # RDNA3 TODO write a script that automatically configures this
 ENV HSA_OVERRIDE_GFX_VERSION=10.3.0
 RUN make clean
-RUN make LLAMA_HIPBLAS=1 -j $(nproc)
+RUN make LLAMA_HIPBLAS=1 LLAMA_VULKAN=1 LLAMA_CLBLAST=1 -j $(nproc)
 RUN chmod 755 koboldcpp.py
