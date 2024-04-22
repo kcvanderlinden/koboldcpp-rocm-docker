@@ -10,8 +10,8 @@ RUN apt install -yq "libstdc++-12-dev"
 #RUN wget -O tmp/rocm.deb https://repo.radeon.com/amdgpu-install/6.0/ubuntu/jammy/amdgpu-install_6.0.60000-1_all.deb
 RUN wget -O tmp/rocm.deb https://repo.radeon.com/amdgpu-install/6.0.2/ubuntu/jammy/amdgpu-install_6.0.60002-1_all.deb
 RUN apt install -yq "./tmp/rocm.deb"
-RUN apt install -yq python3-tk
-run pip install -r requirements.txt
+# RUN apt install -yq python3-tk
+# run pip install -r requirements.txt
 
 
 FROM stage1 as stage2
@@ -23,7 +23,7 @@ FROM stage2 as stage3
 # RDNA3 TODO write a script that automatically configures this
 ENV HSA_OVERRIDE_GFX_VERSION=10.3.0
 
-RUN "./koboldcpp.sh"
+RUN "./koboldcpp.sh" dist
 
 FROM stage3 as stage4
 # RDNA3 TODO write a script that automatically configures this
